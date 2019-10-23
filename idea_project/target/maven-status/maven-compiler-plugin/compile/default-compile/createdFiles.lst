@@ -1,0 +1,5 @@
+TestKnn02\Instance.class
+TestKnn02\KNN_MapReduce$KNN_Reducer.class
+TestKnn02\KNN_MapReduce$KNN_Mapper.class
+TestKnn02\KNN_MapReduce.class
+TestKnn02\Distance.class
