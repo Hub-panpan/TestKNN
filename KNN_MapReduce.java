@@ -43,10 +43,13 @@ public class KNN_MapReduce {
             fileSystem.delete(new Path(otherArgs[2]), true);
         }
 		
-		//设置基本信息
-        Job job = new Job(conf, "KNN");
-        job.setJarByClass(KNN_MapReduce.class);
-        job.setInputFormatClass(TextInputFormat.class);
+	//设置基本信息
+        Job job = new Job(conf, "KNN");//设置job的名字
+        job.setJarByClass(KNN_MapReduce.class);//加载程序运行的主类
+        job.setInputFormatClass(TextInputFormat.class);//数据进行两方面的预处理 
+	    //1是getSplits，返回的是InputSplit数组，对数据进行split分片，每片交给map操作一次 
+	    //2是getRecordReader，返回的是RecordReader对象，对每个split分片进行转换为key-value键值对格式传递给map
+            //常用的InputFormat是TextInputFormat，使用的是LineRecordReader对每个分片进行键值对的转换，以行偏移量作为键，行内容作为值
 
         //设置Mapper
         job.setMapperClass(KNN_Mapper.class);
@@ -188,9 +191,9 @@ class Distance {
     public static double calcEuclideanDistance(double[] a, double[] b) {
         double sum = 0.0;
         for (int i = 0; i < a.length; i++) {
-            sum += Math.pow(a[i] - b[i], 2);
+            sum += Math.pow(a[i] - b[i], 2);//平方
         }
-        return Math.sqrt(sum);
+        return Math.sqrt(sum);//开根号
     }
 }
 
