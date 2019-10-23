@@ -74,9 +74,6 @@ docker配置
 - Mapper:输入一个测试样本，得到该测试样本的K个近邻；
 - Reducer:输入一个测试样本以及它的K个近邻，得到这K个近邻的标签的众数作为预测标签。
 
-原理示意图如下，由于本实验共有3台虚拟机，故设计3个Mapper结点和一个Reducer结点来完成任务。
-
-![](./images/2.png)
 
 ## 实现代码
 
@@ -504,6 +501,8 @@ bin/hadoop jar TestKnn01-1.0-SNAPSHOT.jar TestKnn02/KNN_MapReduce /knn_train /kn
 参考链接：
 
 https://github.com/linzch3/KNN-Mapreduce-From-Scratch
+
 https://blog.csdn.net/weixin_42685589/article/details/81111406
+
 https://blog.csdn.net/qq_39009237/article/details/86346762 
 
