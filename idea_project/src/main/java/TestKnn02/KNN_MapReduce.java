@@ -40,21 +40,26 @@ public class KNN_MapReduce {
 
 
         FileSystem fileSystem = FileSystem.get(conf);
+        /*判断输出路径是不是存在 如果是存在的话就把文件夹删除*/
         if (fileSystem.exists(new Path(otherArgs[2])))
         {
             fileSystem.delete(new Path(otherArgs[2]), true);
         }
+        /*结束*/
 
-
+        //设置job的名字
         Job job = new Job(conf, "KNN");
+        //设置job的主函数入口
         job.setJarByClass(KNN_MapReduce.class);
+        //就是指定TextInputFormat来完成这项工作，这个类是hadoop默认的其实可以不写
         job.setInputFormatClass(TextInputFormat.class);
+        
 
-
+		// 指定mapper类，指定mapper的输出<k2,v2>类型
         job.setMapperClass(KNN_Mapper.class);
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(Text.class);
-
+       //  指定reduce类，指定reduce的输出<k3,v3>类型
         job.setNumReduceTasks(1);
         job.setPartitionerClass(HashPartitioner.class);
 
@@ -96,8 +101,9 @@ public class KNN_MapReduce {
         }
 
         protected void map(LongWritable k1, Text v1, Context context) throws IOException, InterruptedException {
-
+            //distance 
             ArrayList<Double> distance = new ArrayList<Double>(K);
+            //trainlable
             ArrayList<String> trainlabel = new ArrayList<String>(K);
 
 
